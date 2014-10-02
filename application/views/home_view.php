@@ -19,7 +19,7 @@
           <div class="col-lg-8"><button type="submit" name="submit" class="btn btn-success">Buscar CCT</button></div>
           </div>
         </form>
-   <form action="?" method="post" class="form-horizontal">
+   <form action="DatosGenerales/actualiza_cCCT" method="post" class="form-horizontal">
     <div class="row">
       <div class="col-md-6 col-md-push-6">
         <br />
@@ -69,8 +69,9 @@
     <div class="row">
          <div class="col-lg-12"><p class="title_grey_tx">La presente Lista de Verificación con fundamento en el articulo 108 del Reglamento de la Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público, con la finalidad de verificar la calidad de la prestación del servicio de instalación de los bienes que componen ala solución de aulas en las escuelas.</p></div>
          <div class="col-lg-12"><p style="text-align:center;">
+           <input type="hidden" name="id_cct" value="<?php echo $id_cct; ?>">
            <button class="btn btn-lg btn-primary btn-block" type="submit">Comenzar Encuesta</button>
-         </p>
+          </p>
          </div>
    </div>
       
