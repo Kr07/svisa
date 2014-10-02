@@ -22,10 +22,10 @@ class c_CCT extends CI_Model {
     }
     function busca_cCCT($cve_cct, $entidad){
         //$query = $this->db->query('');
-        $query = $this -> db -> select('id_entidad, nom_cct, cve_cct, nom_director, tel_cct, dir_cct, matricula,no_docente, id_municipio, id_localidad, e_mail, num_aulas')//;
+        $query = $this -> db -> select('id_entidad, nom_cct, cve_cct, nom_diretor, tel_cct, dir_cct, matricula,no_docente, id_municipio, id_localidad, e_mail, num_aulas')//;
         //$query = $this -> db 
                 -> from('c_cct')
-                -> where('entidad', $entidad)
+                -> where('id_entidad', $entidad)
                 -> where('cve_cct', $cve_cct)
                 -> get();
         
@@ -53,7 +53,7 @@ class c_CCT extends CI_Model {
 			'id_entidad'    => $id_ent,
 			'nom_cct'       => $row['nom_cct'],
                         'cve_cct'       => $row['cve_cct'],
-                        'nom_director'  => $row['nom_director'],
+                        'nom_diretor'  => $row['nom_diretor'],
                         'tel_cct'       => $row['tel_cct'],
                         'dir_cct'       => $row['dir_cct'],
                         'matricula'     => $row['matricula'],
