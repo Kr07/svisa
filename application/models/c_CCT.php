@@ -38,7 +38,7 @@ class c_CCT extends CI_Model {
             $ent_query = $this ->db -> select('nom_entidad')
                                     -> from('c_entidad')
                                     -> where('id_entidad', $row['id_entidad'])
-                                    ->get();
+                                    -> get();
             $id_ent    = $ent_query -> result_array();
             //se busca la descripcion de la localidad
             $loc_query = $this ->db -> select('nom_localidad')
@@ -54,6 +54,7 @@ class c_CCT extends CI_Model {
             $id_mun    = $mun_query -> result_array();
             
             $data = array(
+                        'id_cct'        => $row['id_cct'],
 			'id_entidad'    => $id_ent,
 			'nom_cct'       => $row['nom_cct'],
                         'cve_cct'       => $row['cve_cct'],
@@ -72,7 +73,10 @@ class c_CCT extends CI_Model {
             return false;
         }
     }
-
+    function actualiza_cCCT($id_cct, $data){// $tel_cct, $matricula, $no_docente, $e_mail, $num_aulas){
+        $this->db->where('id_cct', $id_cct);
+        $this->db->update('c_cct', $data);
+    }
 }
 
 ?>
