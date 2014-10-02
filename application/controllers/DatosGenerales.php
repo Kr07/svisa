@@ -20,6 +20,8 @@
             
             $cct = $this->input->post('cve_cct');
             $entidad= $this->input->post('entidad');
+            if($entidad == null)
+                $entidad = 9;
             $this->load->model('c_CCT');
             $datosGenerales = $this->c_CCT->busca_cCCT($entidad, $cct);
 
