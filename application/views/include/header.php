@@ -11,34 +11,36 @@
 
    <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
    <link href="<?php echo base_url('assets/css/font-awesome.css') ?>" rel="stylesheet">
-
-   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+   <script src="<?php echo base_url('assets/js/jquery-1.11.0.js') ?>"></script>
    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/1.3.1/lodash.min.js"></script>
+ 
    <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
-   <script src="<?php echo base_url('assets/js/jquery-1.10.2.min.js') ?>"></script>
-   <link href="<?php echo base_url('assets/css/bootstrapValidator.css') ?>" rel="stylesheet">
-   <script src="<?php echo base_url('assets/js/bootstrapValidator.js') ?>"></script>
-   <!--<link href="<?php //echo base_url('assets/css/custom.css') ?>" rel="stylesheet">-->
+   
+   <link href="<?php echo base_url('assets/css/survey.css') ?>" rel="stylesheet">
+    <!--<link href="<?php //echo base_url('assets/css/custom.css') ?>" rel="stylesheet">-->
 </head>
 <body>
 
-<div class="navbar navbar-inverse">
+
+<div class="navbar-default">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Company Info</a>
+        <div style="margin-right:24px;"><img src="../assets/img/logo_sep01.png" width="194" height="66"></div>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home Page</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">About</a></li>
+            <li class="active"><a href="#">Inicio</a></li>
+            <li><a href="#">Cuestionarios</a></li>
+            <li><a href="#">Reportes</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="home/logout">Cerrar Sesión</a></li>
         </ul>
     </div>
-</div>   
+</div>
+
+
