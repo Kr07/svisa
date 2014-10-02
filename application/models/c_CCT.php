@@ -35,19 +35,22 @@ class c_CCT extends CI_Model {
             $row = $query->row_array(); 
             /*******************************/
             //se busca la descripcion de la entidad para mostrar
-            $ent_query = $this ->db -> select('nom_entidad');
-            $ent_query = $this ->db -> from('c_entidad');
-            $ent_query = $this ->db -> where('id_entidad', $row['id_entidad']);
+            $ent_query = $this ->db -> select('nom_entidad')
+                                    -> from('c_entidad')
+                                    -> where('id_entidad', $row['id_entidad'])
+                                    ->get();
             $id_ent    = $ent_query -> result_array();
             //se busca la descripcion de la localidad
-            $loc_query = $this ->db -> select('nom_localidad');
-            $loc_query = $this ->db -> from('c_localidad');
-            $loc_query = $this ->db -> where('id_localidad', $row['id_localidad']);
+            $loc_query = $this ->db -> select('nom_localidad')
+                                    -> from('c_localidad')
+                                    -> where('id_localidad', $row['id_localidad'])
+                                    -> get();
             $id_loc    = $loc_query -> result_array();
             //se busca la descripcion de la municipio
-            $mun_query = $this -> db -> select('nom_municipio');
-            $mun_query = $this -> db -> from('c_municipio');
-            $mun_query = $this -> db -> where('id_municipio', $row['id_municipio']);
+            $mun_query = $this -> db -> select('nom_municipio')
+                                     -> from('c_municipio')
+                                     -> where('id_municipio', $row['id_municipio'])
+                                     -> get();
             $id_mun    = $mun_query -> result_array();
             
             $data = array(
