@@ -22,10 +22,12 @@ class c_CCT extends CI_Model {
     }
     function busca_cCCT($cve_cct, $entidad){
         //$query = $this->db->query('');
-        $query = $this -> db -> select('id_entidad, nom_cct, cve_cct, nom_director, tel_cct, dir_cct, matricula,no_docente, id_municipio, id_localidad, e_mail, num_aulas');
-        $query = $this -> db -> from('c_cct');
-        $query = $this -> db -> where('entidad', $entidad); 
-        $query = $this -> db -> where('cve_cct', $cve_cct); 
+        $query = $this -> db -> select('id_entidad, nom_cct, cve_cct, nom_director, tel_cct, dir_cct, matricula,no_docente, id_municipio, id_localidad, e_mail, num_aulas')//;
+        //$query = $this -> db 
+                -> from('c_cct')
+                -> where('entidad', $entidad)
+                -> where('cve_cct', $cve_cct)
+                -> get();
         
         if ($query->num_rows() > 0)
         {
