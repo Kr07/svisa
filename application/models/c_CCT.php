@@ -58,16 +58,16 @@ class c_CCT extends CI_Model {
             
             $data = array(
                         'id_cct'        => $row['id_cct'],
-			'nom_entidad'    => $id_ent[0]['nom_entidad'],
+			'nom_entidad'   => $id_ent[0]['nom_entidad'],
 			'nom_cct'       => $row['nom_cct'],
                         'cve_cct'       => $row['cve_cct'],
-                        'nom_diretor'  => $row['nom_diretor'],
+                        'nom_diretor'   => $row['nom_diretor'],
                         'tel_cct'       => $row['tel_cct'],
                         'dir_cct'       => $row['dir_cct'],
                         'matricula'     => $row['matricula'],
                         'no_docente'    => $row['no_docente'],
-                        'nom_municipio'  => $id_mun[0]['nom_municipio'],
-                        'nom_localidad'  => $id_loc[0]['nom_localidad'],
+                        'nom_municipio' => $id_mun[0]['nom_municipio'],
+                        'nom_localidad' => $id_loc[0]['nom_localidad'],
                         'e_mail'        => $row['e_mail'],
                         'num_aulas'     => $row['num_aulas']
             );
