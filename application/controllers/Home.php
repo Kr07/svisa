@@ -1,10 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of Home
  *
@@ -20,23 +15,22 @@ class Home extends Main_Controller {
 
  function index(){
    if($this->session->userdata('logged_in')){
-     $session_data = $this->session->userdata('logged_in');
-     $data['id_usuario'] = $session_data['id_usuario'];
+       
      $this->load->view('../views/include/header');
-      $this->load->view('home_view', $data);
-      $this->load->view('../views/include/footer');
+     $this->load->view('home_view');
+     $this->load->view('../views/include/footer');
      
    }
    else{
      //If no session, redirect to login page
-     redirect('login', 'refresh');
+     redirect('Login', 'refresh');
    }
  }
 
  function logout(){
    $this->session->unset_userdata('logged_in');
    session_destroy();
-   redirect('home', 'refresh');
+   redirect('Home', 'refresh');
  }
 
 }

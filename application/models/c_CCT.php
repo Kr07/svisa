@@ -51,14 +51,14 @@ class c_CCT extends CI_Model {
             //se busca la descripcion de la municipio
             $mun_query = $this -> db -> select('nom_municipio')
                                      -> from('c_municipio')
-                                     -> where('id_localidad', $row['id_localidad'])
+                                     -> where('id_municipio', $row['id_municipio'])
                                      -> where('id_entidad', $row['id_entidad'])
                                      -> get();
             $id_mun    = $mun_query -> result_array();
             
             $data = array(
                         'id_cct'        => $row['id_cct'],
-			'id_entidad'    => $id_ent,
+			'nom_entidad'    => $id_ent[0]['nom_entidad'],
 			'nom_cct'       => $row['nom_cct'],
                         'cve_cct'       => $row['cve_cct'],
                         'nom_diretor'  => $row['nom_diretor'],
@@ -66,8 +66,8 @@ class c_CCT extends CI_Model {
                         'dir_cct'       => $row['dir_cct'],
                         'matricula'     => $row['matricula'],
                         'no_docente'    => $row['no_docente'],
-                        'id_municipio'  => $id_mun,
-                        'id_localidad'  => $id_loc,
+                        'nom_municipio'  => $id_mun[0]['nom_municipio'],
+                        'nom_localidad'  => $id_loc[0]['nom_localidad'],
                         'e_mail'        => $row['e_mail'],
                         'num_aulas'     => $row['num_aulas']
             );
@@ -76,9 +76,18 @@ class c_CCT extends CI_Model {
             return false;
         }
     }
-    function actualiza_cCCT($id_cct, $data){// $tel_cct, $matricula, $no_docente, $e_mail, $num_aulas){
-        $this->db->where('id_cct', $id_cct);
+    
+    function actualiza_cCCT($cve_cct,$id_entidad, $data){// $tel_cct, $matricula, $no_docente, $e_mail, $num_aulas){
+        $this->db->trans_start();
+        $this->db->where('cve_cct', $cve_cct);
+        $this->db->where('id_entidad', $id_entidad);
         $this->db->update('c_cct', $data);
+        $this->db->trans_complete();
+        if ($this->db->trans_status() === FALSE){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
 
