@@ -15,8 +15,12 @@
     class VisualizaEncuesta extends CI_Controller{
     
             function visualiza_encuesta(){
+                $this->load->model('Encuesta');
+                $lstEncuesta = $this->Encuesta->obtener_cReactivos(1);
+                
+                
                 $this->load->view('../views/include/header');
-                $this->load->view('encuesta', $data);
+                $this->load->view('encuesta', $lstEncuesta);
                 $this->load->view('../views/include/footer');
             }
 
