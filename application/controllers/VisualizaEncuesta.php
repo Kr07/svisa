@@ -23,7 +23,25 @@
                 $this->load->view('encuesta', $lstEncuesta);
                 $this->load->view('../views/include/footer');
             }
-
+            function inserta_encuesta(){
+                if($this->session->userdata('logged_in')){
+                    $data = $this->input->post('arreglo');
+                    
+                    $this->load->model('Encuesta');
+                    $respuesta = $this->Encuesta->insertar_Encuesta($data);
+                    if($respuesta != false){
+                        //siguiente encuenta
+                        $lstEncuesta = $this->Encuesta->obtener_cReactivos($respuesta['id_seccion_reactivo'],$respuesta['num_encuesta'],$respuesta['alcance']);
+                    }
+                    else{
+                        //mandar mensaje de error
+                        
+                    }
+                    $this->load->view('../views/include/header');
+                    $this->load->view('encuesta', $lstEncuesta);
+                    $this->load->view('../views/include/footer');
+                }
+            }
 
     //put your code here
     }
