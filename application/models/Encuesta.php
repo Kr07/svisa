@@ -72,6 +72,35 @@
                 return false;
             }
         }
-        
+        function insertar_Encuesta($lstRespuesta){
+            $id_seccion_reactivo = $lstRespuesta['id_seccion_reactivo'];
+            $num_encuesta = $lstRespuesta['num_encuesta'];
+            $respuesta = $lstRespuesta['respuesta'];
+            //$alcance = $respuesta['alcance'];
+            //$ver_aula = $respuesta ['ver_aula'];     
+            //$ver_escuela = $respuesta ['ver_escuela'];
+            for($i=0; $i < count($respuesta); $i++){
+                $alcance = $respuesta[$i]['alcance'];
+                $ver_aula = $respuesta [$i]['ver_aula'];     
+                $ver_escuela = $respuesta [$i]['ver_escuela'];
+                if($alcance == 1){//escuela
+                    $this->db->insert('ver_escuela', $ver_escuela); 
+                }
+                if($alcance == 2){//aula
+                    $this->db->insert('ver_aula', $ver_aula); 
+                }
+                $afftectedRows = $this->db->affected_rows();
+            }
+            if($afftectedRows >0){
+                $lstOpciones = array();
+                $lstOpciones[] = $id_seccion_reactivo;
+                $lstOpciones[] = $num_encuesta;
+                $lstOpciones[] = $alcance;
+                return $lstOpciones;
+            }
+            else{
+                return false;                
+            }
+        }
         //put your code here
     }
