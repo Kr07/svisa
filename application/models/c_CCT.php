@@ -23,7 +23,7 @@ class c_CCT extends CI_Model {
     }
     function busca_cCCT($cve_cct, $entidad){
         //$query = $this->db->query('');
-        $query = $this -> db -> select('id_entidad, nom_cct, cve_cct, nom_diretor, tel_cct, dir_cct, matricula,no_docente, id_municipio, id_localidad, e_mail, num_aulas')//;
+        $query = $this -> db -> select('id_cct,id_entidad, nom_cct, cve_cct, nom_diretor, tel_cct, dir_cct, matricula,no_docente, id_municipio, id_localidad, e_mail, num_aulas')//;
         //$query = $this -> db 
                 -> from('c_cct')
                 -> where('id_entidad', $entidad)
@@ -44,12 +44,15 @@ class c_CCT extends CI_Model {
             $loc_query = $this ->db -> select('nom_localidad')
                                     -> from('c_localidad')
                                     -> where('id_localidad', $row['id_localidad'])
+                                    -> where('id_entidad', $row['id_entidad'])
                                     -> get();
             $id_loc    = $loc_query -> result_array();
             //se busca la descripcion de la municipio
             $mun_query = $this -> db -> select('nom_municipio')
                                      -> from('c_municipio')
                                      -> where('id_municipio', $row['id_municipio'])
+                                     -> where('id_localidad', $row['id_localidad'])
+                                     -> where('id_entidad', $row['id_entidad'])
                                      -> get();
             $id_mun    = $mun_query -> result_array();
             
