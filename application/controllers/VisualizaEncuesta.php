@@ -27,6 +27,8 @@
                 if($this->session->userdata('logged_in')){
                     $data = $this->input->post('arreglo');
                     
+                    $this->load->model('info_Verificacion');
+                    $this->Encuesta->insertar_infVerificacion($usuario, $cct, $semaforo);
                     $this->load->model('Encuesta');
                     $respuesta = $this->Encuesta->insertar_Encuesta($data);
                     if($respuesta != false){
