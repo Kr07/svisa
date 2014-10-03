@@ -16,9 +16,9 @@
     
             function visualiza_encuesta(){
                 $this->load->model('Encuesta');
-                $lstEncuesta = $this->Encuesta->obtener_cReactivos(1);
+                $lstEncuesta = $this->Encuesta->obtener_cReactivos(1,1,1);
                 
-                
+                print_r($lstEncuesta);
                 $this->load->view('../views/include/header');
                 $this->load->view('encuesta', $lstEncuesta);
                 $this->load->view('../views/include/footer');

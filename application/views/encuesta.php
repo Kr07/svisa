@@ -6,7 +6,7 @@
 	   <div class="col-lg-12"><p class="title_grey" align="center">LISTA DE VERIFICACIÓN DE LA CALIDAD DE LA INSTALACIÓN DE LA SOLUCIÓN <br>
 	     DE AULA DEL PROGRAMA DE INCLUSIÓN Y ALFABETIZACIÓN DIGITAL</p></div>
 	   <div class="col-lg-12"><br /><p class="title_grey_02">SOBRE LA INSTALACIÓN EN GENERAL</p></div>
-           	
+
           </div>	
       <div class="row">
       <br />    

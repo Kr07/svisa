@@ -105,6 +105,7 @@ $(document).ready(function(){
          <div class="col-lg-12"><p style="text-align:center;">
            <!--<input type="hidden" name="id_cct" value="<?php //echo $id_cct; ?>">-->
            <input type="hidden" id="cve_cct" name="cve_cct">
+           <input type="hidden" id="seccion" name="seccion" value="1">
            <button class="btn btn-lg btn-primary btn-block" type="submit">Comenzar Encuesta</button>
           </p>
          </div>

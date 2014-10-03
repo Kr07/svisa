@@ -53,11 +53,12 @@
 		
 		$this->load->model('c_CCT');
 		$actualizado=$this->c_CCT->actualiza_cCCT($cve_cct,$id_entidad, $data);
+                $seccion = $this->input->post('seccion');
+                
                 
                 if ($actualizado){
-                    $this->load->view('../views/include/header');	
-                    $this->load->view("encuesta");
-                    $this->load->view('../views/include/footer');
+                    redirect('VisualizaEncuesta/visualiza_encuesta');
+                    
                 }else{
                     $this->load->view('../views/include/header');
                     $this->load->view('home_view');

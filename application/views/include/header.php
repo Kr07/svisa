@@ -36,7 +36,7 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Inicio</a></li>
+            <li class="active"><a href="<?php echo base_url('/index.php/Home') ?>">Inicio</a></li>
             <li><a href="#">Cuestionarios</a></li>
             <li><a href="#">Reportes</a></li>
         </ul>
