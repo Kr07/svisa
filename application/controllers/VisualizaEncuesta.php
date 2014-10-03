@@ -28,7 +28,12 @@
                     $data = $this->input->post('arreglo');
                     
                     $this->load->model('info_Verificacion');
-                    $this->Encuesta->insertar_infVerificacion($usuario, $cct, $semaforo);
+                    if(seccion == 1){
+                        $this->info_Verificacion->insertar_infVerificacion($usuario, $cct, $semaforo);
+                    }
+                    else{
+                        $this->info_Verificacion->actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo);
+                    }
                     $this->load->model('Encuesta');
                     $respuesta = $this->Encuesta->insertar_Encuesta($data);
                     if($respuesta != false){
