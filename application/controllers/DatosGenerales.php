@@ -18,7 +18,7 @@
             if($this->session->userdata('logged_in')){
                 
                 $cct = $this->input->post('cct');
-                $entidad= $this->session->userdata('id_entidad');
+                $entidad= $this->session->userdata('logged_in')['id_entidad'];
                 $this->load->model('c_CCT');
                 $datosGenerales = $this->c_CCT->busca_cCCT($cct,$entidad );
 
@@ -35,7 +35,7 @@
         function actualiza_cCCT(){
             if($this->session->userdata('logged_in')){
                 $cve_cct = $this->input->post('cve_cct');
-                $id_entidad= $this->session->userdata('id_entidad');
+                $id_entidad= $this->session->userdata('logged_in')['id_entidad'];
                 
 		$tel_cct = $this->input->post('tel_cct');
 		$matricula = $this->input->post('matricula');
