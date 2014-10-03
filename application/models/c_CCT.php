@@ -51,7 +51,6 @@ class c_CCT extends CI_Model {
             $mun_query = $this -> db -> select('nom_municipio')
                                      -> from('c_municipio')
                                      -> where('id_municipio', $row['id_municipio'])
-                                     -> where('id_localidad', $row['id_localidad'])
                                      -> where('id_entidad', $row['id_entidad'])
                                      -> get();
             $id_mun    = $mun_query -> result_array();
