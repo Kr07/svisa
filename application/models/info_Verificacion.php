@@ -24,6 +24,7 @@
             );
             $this->db->insert('ver_aula', $data); 
             
+            
         }
         function actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo){
             $data = array(
@@ -35,6 +36,13 @@
             $this->db->where('id_verificacion', $id_verficacion);
             $this->db->update('info_verificacion', $data); 
             
+        }
+        function obtener_ultimoInsertado(){
+            $query = $this->db->select('id_verificacion')
+                    ->from('info_verificacion')
+                    ->order_by('id_verificacion', 'desc')
+                    ->get();
+            return $query;
         }
         //put your code here
     }
