@@ -28,7 +28,7 @@
                     -> where('status', 1)
                     -> get();
             $dept = array();
-            echo $query->num_rows();
+
             if ($query->num_rows() > 0){
                 $row = $query->result_array(); 
                 for($i=0;$i<$query->num_rows();$i++){
