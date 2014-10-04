@@ -72,7 +72,7 @@
                 return false;
             }
         }
-        function insertar_Encuesta($lstRespuesta){
+        function insertar_Encuesta($id_verificacion,$lstRespuesta){
             $id_seccion_reactivo = $lstRespuesta['id_seccion_reactivo'];
             $num_encuesta = $lstRespuesta['num_encuesta'];
             $respuesta = $lstRespuesta['respuesta'];
@@ -82,10 +82,12 @@
             //$ver_escuela = $respuesta ['ver_escuela'];
             if($alcance == 1){//escuela
                 $ver_escuela = $respuesta ['ver_escuela'];
+                $ver_escuela['id_verificacion'] = $id_verificacion;
                 $this->db->insert('ver_escuela', $ver_escuela); 
             }
-            if($alcance == 2){//aula
-                $ver_aula = $respuesta ['ver_aula'];     
+            if($alcance == 2){//aula 
+                $ver_aula = $respuesta ['ver_aula'];   
+                $ver_aula['id_verificacion'] = $id_verificacion;
                 $this->db->insert('ver_aula', $ver_aula); 
             }
             $afftectedRows = $this->db->affected_rows();
