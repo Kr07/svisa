@@ -27,12 +27,15 @@
                 if($this->session->userdata('logged_in')){
                     $data = $this->input->post('arreglo');
                     
+                    
+                    $this->load->model('seccion_encuesta');
+                    $id_seccion = $this ->seccion_encuesta->obtener_ultimo($num_encuesta);
                     $this->load->model('info_Verificacion');
-                    if(seccion == 1){
+                    if($data['seccion'] == 1){
                         $this->info_Verificacion->insertar_infVerificacion($usuario, $cct, $semaforo);
                         $id_verificacion = obtener_ultimoInsertado($cct,$usuario );
                     }
-                    else{
+                    if($id_seccion == $data['seccion']){
                         $this->info_Verificacion->actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo);
                     }
                     $this->load->model('Encuesta');
