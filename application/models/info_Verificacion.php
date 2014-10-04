@@ -37,10 +37,13 @@
             $this->db->update('info_verificacion', $data); 
             
         }
-        function obtener_ultimoInsertado(){
+        function obtener_ultimoInsertado($cct, $usuario){
             $query = $this->db->select('id_verificacion')
                     ->from('info_verificacion')
+                    ->where('id_usuario', $usuario)
+                    ->where('id_cct', $cct)
                     ->order_by('id_verificacion', 'desc')
+                    ->limit(1)
                     ->get();
             return $query;
         }
