@@ -30,12 +30,13 @@
                     $this->load->model('info_Verificacion');
                     if(seccion == 1){
                         $this->info_Verificacion->insertar_infVerificacion($usuario, $cct, $semaforo);
+                        $id_verificacion = obtener_ultimoInsertado();
                     }
                     else{
                         $this->info_Verificacion->actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo);
                     }
                     $this->load->model('Encuesta');
-                    $respuesta = $this->Encuesta->insertar_Encuesta($data);
+                    $respuesta = $this->Encuesta->insertar_Encuesta($id_verificacion,$data);
                     if($respuesta != false){
                         //siguiente encuenta
                         $lstEncuesta = $this->Encuesta->obtener_cReactivos($respuesta['id_seccion_reactivo'],$respuesta['num_encuesta'],$respuesta['alcance']);
