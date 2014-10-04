@@ -30,7 +30,7 @@
                     $this->load->model('info_Verificacion');
                     if(seccion == 1){
                         $this->info_Verificacion->insertar_infVerificacion($usuario, $cct, $semaforo);
-                        $id_verificacion = obtener_ultimoInsertado();
+                        $id_verificacion = obtener_ultimoInsertado($cct,$usuario );
                     }
                     else{
                         $this->info_Verificacion->actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo);
