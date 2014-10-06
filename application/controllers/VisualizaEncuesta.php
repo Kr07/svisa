@@ -65,6 +65,7 @@
             /*********************************************/
             //lstRespuesta
             /***************************************************/
+            $this->load->library('form_validation');
             $lstRespuesta = $this->input->post('lstRespuesta',TRUE);
             foreach ($lstRespuesta as &$valor) {
                 $valor['id_verificacion'] = $id_verificacion;
