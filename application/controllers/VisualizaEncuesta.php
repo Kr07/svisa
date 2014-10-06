@@ -16,16 +16,19 @@
     class VisualizaEncuesta extends CI_Controller{
     
         function getEncuestaData(){
+            
             if($this->session->userdata('logged_in')){
                 
                 $this->load->model('Encuesta');
 //                $id_cct = $this->input->post('id_cct');
     //            $num_aulas = $this->input->post('num_aulas');
+                
                 $seccion= $this->input->post('seccion');
                 $encuesta= $this->input->post('encuesta');
                 $alcance= $this->input->post('alcance');
 
                 $lstEncuesta = $this->Encuesta->obtener_cReactivos($seccion,$encuesta,$alcance);
+               
                 header('Content-Type: application/json');
                 echo json_encode( $lstEncuesta );
                 
@@ -59,10 +62,13 @@
                     return false;
                 }
             }
-                
-            $lstRespuesta = $this->input->post('lstRespuesta');
+            /*********************************************/
+            //lstRespuesta
+            /***************************************************/
+            $lstRespuesta = $this->input->post('lstRespuesta',TRUE);
             foreach ($lstRespuesta as &$valor) {
                 $valor['id_verificacion'] = $id_verificacion;
+                $this->form_validation->set_rules($valor, 'observaciones', 'requeried|xss_clean');
             }
             unset($valor);
             
