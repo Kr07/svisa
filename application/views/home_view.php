@@ -100,6 +100,9 @@ $(document).ready(function(){
                    <label class="radio-inline"><input type="radio" name="num_aulas" id="inlineRadio1" value="1" required> 1</label>
                    <label class="radio-inline"><input type="radio" name="num_aulas" id="inlineRadio2" value="2" required> 2</label>
                    <label class="radio-inline"><input type="radio" name="num_aulas" id="inlineRadio3" value="3" required> 3</label>
+                   <label class="radio-inline"><input type="radio" name="num_aulas" id="inlineRadio4" value="4" required> 4</label>
+                   <label class="radio-inline"><input type="radio" name="num_aulas" id="inlineRadio5" value="5" required> 5</label>
+                   <label class="radio-inline"><input type="radio" name="num_aulas" id="inlineRadio6" value="6" required> 6</label>
              </div>
           </div>
            
