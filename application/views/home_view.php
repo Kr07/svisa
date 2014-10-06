@@ -1,32 +1,36 @@
 <script>
 $(document).ready(function(){
     $.ajaxSetup({ cache:false });
+    var f = new Date();
+    $('#fchNow').html(
+        'Fecha: '+f.getDate() + 
+        "/" + (f.getMonth() +1) + 
+        "/" + f.getFullYear()
+    );
     $('#busca').click(function() { 
-//      alert($('#cct').val());
-      
-    $.ajax({
-        url : "DatosGenerales/mostrar_DatosGenerales",
-        type: "POST",
-        dataType : 'json',
-        cache : false,
-        data : {cct: $('#cct').val()},
-        success: function(data, textStatus, jqXHR){
-//          alert( "Data Loaded: " + JSON.stringify( data ));
-            if(data){
-                for (var i in data){
-                    if($('#'+i)){
-                        $('#'+i).val(data[i]);  
+        $.ajax({
+            url : "DatosGenerales/mostrar_DatosGenerales",
+            type: "POST",
+            dataType : 'json',
+            cache : false,
+            data : {cct: $('#cct').val()},
+            success: function(data, textStatus, jqXHR){
+    //          alert( "Data Loaded: " + JSON.stringify( data ));
+                if(data){
+                    for (var i in data){
+                        if($('#'+i)){
+                            $('#'+i).val(data[i]);  
+                        }
                     }
+                    $('#inlineRadio'+data.num_aulas).prop('checked', true);
+                }else{
+                    alert('¡Acceso denegado!\nVerifique su CCT')
                 }
-                $('#inlineRadio'+data.num_aulas).prop('checked', true);
-            }else{
-                alert('¡Acceso denegado!\nVerifique su CCT')
+            },
+            error: function (jqXHR, textStatus, errorThrown){
+                alert(errorThrown);
             }
-        },
-        error: function (jqXHR, textStatus, errorThrown){
-            alert(errorThrown);
-        }
-    });
+        });
 
     }); 
 
@@ -41,7 +45,9 @@ $(document).ready(function(){
        <div class="col-lg-12"><p class="title_grey" align="center">LISTA DE VERIFICACIÓN DE LA CALIDAD DE LA INSTALACIÓN DE LA SOLUCIÓN <br>
          DE AULA DEL PROGRAMA DE INCLUSIÓN Y ALFABETIZACIÓN DIGITAL</p></div>
        <div class="col-lg-12"><br /><p class="title_grey_02">VERIFICACIÓN DE CALIDAD EN SITIO <br>
-         DE LA INSTALACIÓN DE LA SOLUCIÓN DE AULA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Fecha:01/10/2014</b></p></div> 
+         DE LA INSTALACIÓN DE LA SOLUCIÓN DE AULA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <b id="fchNow">Fecha:01/10/2014</b></p></div> 
     </div>  
    
 
@@ -105,6 +111,7 @@ $(document).ready(function(){
          <div class="col-lg-12"><p style="text-align:center;">
            <!--<input type="hidden" name="id_cct" value="<?php //echo $id_cct; ?>">-->
            <input type="hidden" id="cve_cct" name="cve_cct">
+           <input type="hidden" id="id_cct" name="id_cct">
            <input type="hidden" id="seccion" name="seccion" value="1">
            <button class="btn btn-lg btn-primary btn-block" type="submit">Comenzar Encuesta</button>
           </p>

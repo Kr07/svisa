@@ -10,21 +10,28 @@
  * Description of info_Verificacion
  *
  * @author lenovo
- */
+ * @modify Kroz
+*/
     class info_Verificacion extends CI_Model {
         function __construct(){
             $this -> load -> database();
         }
-        function insertar_infVerificacion($usuario, $cct, $semaforo){
+        function insertar_infVerificacion($id_usuario, $id_cct, $semaforo){
             $data = array(
-                'id_usuario' => $usuario,
-                'id_cct' => $cct,
-                'fch_verificacion' => now(),
+                'id_usuario' => $id_usuario,
+                'id_cct' => $id_cct,
+                'fch_verificacion' => date('Y-m-d G:i:s'),
                 'semaforo' => $semaforo                
             );
-            $this->db->insert('ver_aula', $data); 
+            $this->db->trans_start();
+            $this->db->insert('info_verificacion', $data); 
+            $this->db->trans_complete();
             
-            
+            if ($this->db->trans_status() === FALSE){
+                return false;
+            }else{
+                return true;
+            }
         }
         function actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo){
             $data = array(
@@ -37,15 +44,21 @@
             $this->db->update('info_verificacion', $data); 
             
         }
-        function obtener_ultimoInsertado($cct, $usuario){
+        function obtener_ultimoInsertado($id_cct, $id_usuario){
             $query = $this->db->select('id_verificacion')
                     ->from('info_verificacion')
-                    ->where('id_usuario', $usuario)
-                    ->where('id_cct', $cct)
+                    ->where('id_usuario', $id_usuario)
+                    ->where('id_cct', $id_cct)
                     ->order_by('id_verificacion', 'desc')
                     ->limit(1)
                     ->get();
-            return $query;
+            if($query -> num_rows() == 1){
+                $row = $query->row_array();
+                return $row['id_verificacion'];
+              }
+              else{
+                return false;
+              }
         }
         //put your code here
     }

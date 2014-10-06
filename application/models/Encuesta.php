@@ -10,6 +10,7 @@
  * Description of Encuesta
  *
  * @author lenovo
+ * @modify Kroz
  */
     class Encuesta extends CI_Model {
         function __construct(){
@@ -58,8 +59,6 @@
                             $dep[$i]['tpo_reactivo'][$j]['respuesta']= $r[$j]['respuesta'];
                             $dep[$i]['tpo_reactivo'][$j]['inciso']= $r[$j]['inciso'];
                         }
-
-                        
                     }
                     else{
                         $dep[$i]['tpo_reactivo'] = $row[$i]['tpo_reactivo'];
@@ -72,47 +71,60 @@
                 return false;
             }
         }
-        function insertar_Encuesta($id_verificacion,$lstRespuesta){
-            $id_seccion_reactivo = $lstRespuesta['id_seccion_reactivo'];
-            $num_encuesta = $lstRespuesta['num_encuesta'];
-            $respuesta = $lstRespuesta['respuesta'];
-            
-            $alcance = $respuesta['alcance'];
-            //$ver_aula = $respuesta ['ver_aula'];     
-            //$ver_escuela = $respuesta ['ver_escuela'];
-            if($alcance == 1){//escuela
-                $ver_escuela = $respuesta ['ver_escuela'];
-                $ver_escuela['id_verificacion'] = $id_verificacion;
-                $this->db->insert('ver_escuela', $ver_escuela); 
-            }
-            if($alcance == 2){//aula 
-                $ver_aula = $respuesta ['ver_aula'];   
-                $ver_aula['id_verificacion'] = $id_verificacion;
-                $this->db->insert('ver_aula', $ver_aula); 
-            }
-            $afftectedRows = $this->db->affected_rows();
-           /* for($i=0; $i < count($respuesta); $i++){
-                //$alcance = $respuesta[$i]['alcance'];
-                $ver_aula = $respuesta [$i]['ver_aula'];     
-                $ver_escuela = $respuesta [$i]['ver_escuela'];
-                if($alcance == 1){//escuela
-                    $this->db->insert('ver_escuela', $ver_escuela); 
-                }
-                if($alcance == 2){//aula
-                    $this->db->insert('ver_aula', $ver_aula); 
-                }
-                $afftectedRows = $this->db->affected_rows();
-            }*/
-            if($afftectedRows >0){
-                $lstOpciones = array();
-                $lstOpciones[] = $id_seccion_reactivo;
-                $lstOpciones[] = $num_encuesta;
-                $lstOpciones[] = $alcance;
-                return $lstOpciones;
+        function getSeccionEncuesta($id_seccion_reactivo,$num_encuesta){
+            $this -> db -> select('id_seccion_reactivo,num_encuesta,nom_seccion,status,alcance');
+            $this -> db -> from('c_seccion_encuesta');
+            $this -> db -> where('id_seccion_reactivo', $id_seccion_reactivo);
+            $this -> db -> where('num_encuesta', $num_encuesta);
+            $this -> db -> limit(1);
+
+            $query = $this -> db -> get();
+
+            if($query -> num_rows() == 1){
+              return $query->result();
             }
             else{
-                return false;                
+              return false;
+            }
+         }
+         function getFirstSeccionEncuesta($num_encuesta,$alcance){
+            $this -> db -> select('id_seccion_reactivo,num_encuesta,nom_seccion,status,alcance');
+            $this -> db -> from('c_seccion_encuesta');
+            $this -> db -> where('alcance', $alcance);
+            $this -> db -> where('num_encuesta', $num_encuesta);
+            $this -> db -> limit(1);
+
+            $query = $this -> db -> get();
+
+            if($query -> num_rows() == 1){
+              return $query->result();
+            }
+            else{
+              return false;
+            }
+         }
+         
+        function setVerEscuela($data){
+            $this->db->trans_start();
+            $this->db->insert_batch('ver_escuela', $data);
+            $this->db->trans_complete();
+            if ($this->db->trans_status() === FALSE){
+                return false;
+            }else{
+                return true;
             }
         }
+        
+        function setVerAula($data){
+            $this->db->trans_start();
+            $this->db->insert_batch('ver_aula', $data);
+            $this->db->trans_complete();
+            if ($this->db->trans_status() === FALSE){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        
         //put your code here
     }

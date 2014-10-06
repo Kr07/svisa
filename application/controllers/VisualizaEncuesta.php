@@ -10,49 +10,99 @@
  * Description of VisualizaEncuesta
  *
  * @author lenovo
+ * @modify Kroz
  */
     if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     class VisualizaEncuesta extends CI_Controller{
     
-            function visualiza_encuesta(){
-                $this->load->model('Encuesta');
-                $lstEncuesta = $this->Encuesta->obtener_cReactivos(1,1,1);
+        function getEncuestaData(){
+            if($this->session->userdata('logged_in')){
                 
-                print_r($lstEncuesta);
-                $this->load->view('../views/include/header');
-                $this->load->view('encuesta', $lstEncuesta);
-                $this->load->view('../views/include/footer');
+                $this->load->model('Encuesta');
+//                $id_cct = $this->input->post('id_cct');
+    //            $num_aulas = $this->input->post('num_aulas');
+                $seccion= $this->input->post('seccion');
+                $encuesta= $this->input->post('encuesta');
+                $alcance= $this->input->post('alcance');
+
+                $lstEncuesta = $this->Encuesta->obtener_cReactivos($seccion,$encuesta,$alcance);
+                header('Content-Type: application/json');
+                echo json_encode( $lstEncuesta );
+                
+            }else{redirect('Login', 'refresh');}
+            
+        }
+        
+        function setResultados(){
+        if($this->session->userdata('logged_in')){
+            $this->load->model('info_Verificacion');
+            $this->load->model('Encuesta');
+            
+            $id_cct = $this->input->post('id_cct');
+            $id_usuario= $this->session->userdata('logged_in')['id_usuario'];
+            $id_verificacion = $this->input->post('id_verificacion');
+            $aula=$this->input->post('aula');
+            $alcance=$this->input->post('alcance');
+            $num_encuesta=$this->input->post('num_encuesta');
+            $id_seccion_reactivo=$this->input->post('id_seccion_reactivo');
+           
+            if($id_verificacion==0){
+                $id_verificacion=$this->info_Verificacion->obtener_ultimoInsertado($id_cct, $id_usuario);
             }
-            function inserta_encuesta(){
-                if($this->session->userdata('logged_in')){
-                    $data = $this->input->post('arreglo');
-                    
-                    
-                    $this->load->model('seccion_encuesta');
-                    $id_seccion = $this ->seccion_encuesta->obtener_ultimo($num_encuesta);
-                    $this->load->model('info_Verificacion');
-                    if($data['seccion'] == 1){
-                        $this->info_Verificacion->insertar_infVerificacion($usuario, $cct, $semaforo);
-                        $id_verificacion = $this->info_Verificacion->obtener_ultimoInsertado($cct,$usuario );
-                    }
-                    if($id_seccion == $data['seccion']){
-                        $this->info_Verificacion->actualizar_infVerificacion($id_verficacion,$usuario, $cct, $semaforo);
-                    }
-                    $this->load->model('Encuesta');
-                    $respuesta = $this->Encuesta->insertar_Encuesta($id_verificacion,$data);
-                    if($respuesta != false){
-                        //siguiente encuenta
-                        $lstEncuesta = $this->Encuesta->obtener_cReactivos($respuesta['id_seccion_reactivo'],$respuesta['num_encuesta'],$respuesta['alcance']);
-                    }
-                    else{
-                        //mandar mensaje de error
-                        
-                    }
-                    $this->load->view('../views/include/header');
-                    $this->load->view('encuesta', $lstEncuesta);
-                    $this->load->view('../views/include/footer');
+            
+            if($id_verificacion==false){
+                if($this->info_Verificacion->insertar_infVerificacion($id_usuario, $id_cct, 0)){
+                    $id_verificacion=$this->info_Verificacion->obtener_ultimoInsertado($id_cct, $id_usuario);
+                }else{
+                    header('Content-Type: application/json');
+                    echo json_encode( array('mensaje' => 'No fue posible insertar[info_verificacion]'));
+                    return false;
                 }
             }
+                
+            $lstRespuesta = $this->input->post('lstRespuesta');
+            foreach ($lstRespuesta as &$valor) {
+                $valor['id_verificacion'] = $id_verificacion;
+            }
+            unset($valor);
+            
+            if($alcance==1){
+                if(!$this->Encuesta->setVerEscuela($lstRespuesta)){
+                    header('Content-Type: application/json');
+                    echo json_encode( array('mensaje' => 'No fue posible insertar[info_verificacion]'));
+                    return false;
+                }
+            }
+            
+            if($alcance==2){
+                foreach ($lstRespuesta as &$valor) {
+                    $valor['aula'] = $aula;
+                }
+                unset($valor);
+                if(!$this->Encuesta->setVerAula($lstRespuesta)){
+                    header('Content-Type: application/json');
+                    echo json_encode( array('mensaje' => 'No fue posible insertar[info_verificacion]'));
+                    return false;
+                }
+            }
+            
+            $seccionData=$this->Encuesta->getSeccionEncuesta(($id_seccion_reactivo+1),$num_encuesta);
 
+            $cambioAula=false;
+            if($seccionData==false){
+                $seccionData=$this->Encuesta->getFirstSeccionEncuesta($num_encuesta,$alcance);
+                $cambioAula=true;
+            }
+            $data = array(
+                'seccionData' => $seccionData,
+                'cambioAula' => $cambioAula,
+                'id_verificacion' => $id_verificacion           
+            );
+            
+            header('Content-Type: application/json');
+            echo json_encode( $data ); 
+        }else{redirect('Login', 'refresh');}
+        }
+        
     //put your code here
     }

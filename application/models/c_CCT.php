@@ -30,8 +30,7 @@ class c_CCT extends CI_Model {
                 -> where('cve_cct', $cve_cct)
                 -> get();
         
-        if ($query->num_rows() > 0)
-        {
+        if ($query->num_rows() > 0){
             $row = $query->row_array(); 
             /*******************************/
             //se busca la descripcion de la entidad para mostrar
@@ -77,9 +76,9 @@ class c_CCT extends CI_Model {
         }
     }
     
-    function actualiza_cCCT($cve_cct,$id_entidad, $data){// $tel_cct, $matricula, $no_docente, $e_mail, $num_aulas){
+    function actualiza_cCCT($id_cct,$id_entidad, $data){// $tel_cct, $matricula, $no_docente, $e_mail, $num_aulas){
         $this->db->trans_start();
-        $this->db->where('cve_cct', $cve_cct);
+        $this->db->where('id_cct', $id_cct);
         $this->db->where('id_entidad', $id_entidad);
         $this->db->update('c_cct', $data);
         $this->db->trans_complete();
