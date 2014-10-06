@@ -40,8 +40,9 @@
             <li><a href="#">Cuestionarios</a></li>
             <li><a href="#">Reportes</a></li>
         </ul>
+        
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo base_url('/index.php/Home/logout') ?>">Cerrar Sesión</a></li>
+            <li><?php echo $this->session->userdata('logged_in')['username']; ?><a href="<?php echo base_url('/index.php/Home/logout') ?>">Cerrar Sesión</a></li>
         </ul>
     </div>
 </div>
