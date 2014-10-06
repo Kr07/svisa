@@ -44,7 +44,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><?php
             if($this->session->userdata('logged_in')){
-                echo $this->session->userdata('logged_in')['username'];
+                echo $this->session->userdata('logged_in')['id_institucion'];
             } 
             ?>
                 
