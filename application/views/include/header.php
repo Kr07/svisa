@@ -40,15 +40,10 @@
             <li><a href="#">Cuestionarios</a></li>
             <li><a href="#">Reportes</a></li>
         </ul>
-        
+
         <ul class="nav navbar-nav navbar-right">
-            <li><?php
-            if($this->session->userdata('logged_in')){
-                echo $this->session->userdata('logged_in')['id_institucion'];
-            } 
-            ?>
-                
-                <a href="<?php echo base_url('/index.php/Home/logout') ?>">Cerrar Sesión</a></li>
+            <li class="usuarioLog"><?php if($this->session->userdata('logged_in')) echo $this->session->userdata('logged_in')['username']; ?></li>
+            <li><a href="<?php echo base_url('/index.php/Home/logout') ?>">Cerrar Sesión</a></li>
         </ul>
     </div>
 </div>
