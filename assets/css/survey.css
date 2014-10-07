@@ -61,11 +61,21 @@ body {
 .title_grey_02 {
 	font-family: "Soberana Sans Regular", serif;
 	font-size: 18px;
+	color: #7F7E80;
+	text-align: left;
+	//border-bottom-width: thin;
+	//border-bottom-style: solid;
+	//border-bottom-color: #D5D5D5;
+	font-weight: lighter;
+}
+.title_grey_22 {
+	font-family: "Soberana Sans Regular", serif;
+	font-size: 18px;
 	color: #C33939;//7F7E80;
 	text-align: left;
-	border-bottom-width: thin;
-	border-bottom-style: solid;
-	border-bottom-color: #D5D5D5;
+	//border-bottom-width: thin;
+	//border-bottom-style: solid;
+	//border-bottom-color: #D5D5D5;
 	font-weight: lighter;
 }
 .title_grey_tx {
