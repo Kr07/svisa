@@ -34,12 +34,16 @@ $(document).ready(function(){
 //            alert( "Data Loaded: " + JSON.stringify( data ));
                 alcance=data[0].alcance;
                 if(alcance==1){
-                    $('#titleCnt').html(cve_cct+' / '+data[0].nom_seccion);
+                    $('#cCCT').html(cve_cct+' / ');
+                    //$('#titleCnt').html(cve_cct+' / '+data[0].nom_seccion);
+                    $('#titleCnt').html(data[0].nom_seccion);
                 }else if(alcance==2){
                     if(aulaVerificacion==0){
                         aulaVerificacion++;
                     }
-                    $('#titleCnt').html(cve_cct+' / 5 '+aulas[aulaVerificacion]+' / '+data[0].nom_seccion);
+                    $('#cCCT').html(cve_cct+' / 5 '+aulas[aulaVerificacion]+' / ');
+                    //$('#titleCnt').html(cve_cct+' / 5 '+aulas[aulaVerificacion]+' / '+data[0].nom_seccion);
+                    $('#titleCnt').html(data[0].nom_seccion);
                 }
                 id_seccion_reactivo=data[0].id_seccion_reactivo;
 //                alert( "Data Loaded: " + JSON.stringify( data ));
@@ -160,7 +164,8 @@ $(document).ready(function(){
                     </div>
                     <div class="col-lg-12">
                         <br />
-                        <p class="title_grey_02" id="titleCnt"/><!--contenedor de titulo de seccion-->
+                        <label class="title_grey_02" id="cCCT"></label><label class="title_grey_22" id="titleCnt"></label><!--contenedor de titulo de seccion-->
+                        <hr/>
                     </div>
                 </div>	
                 <div class="row">
